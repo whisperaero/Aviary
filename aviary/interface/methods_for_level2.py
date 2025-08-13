@@ -336,7 +336,7 @@ class AviaryProblem(om.Problem):
         )
 
         ## Set Up Core Subsystems ##
-        prop = CorePropulsionBuilder('core_propulsion', engine_models=self.engine_builders)
+        # prop = CorePropulsionBuilder('core_propulsion', engine_models=self.engine_builders)
         mass = CoreMassBuilder('core_mass', code_origin=self.mass_method)
 
         # If all phases ask for tabular aero, we can skip pre-mission. Check phase_info
@@ -378,7 +378,7 @@ class AviaryProblem(om.Problem):
         )
 
         subsystems = self.core_subsystems = {
-            'propulsion': prop,
+            # 'propulsion': prop,
             'geometry': geom,
             'mass': mass,
             'aerodynamics': aero,
@@ -387,7 +387,7 @@ class AviaryProblem(om.Problem):
         # TODO optionally accept which subsystems to load from phase_info
         default_mission_subsystems = [
             subsystems['aerodynamics'],
-            subsystems['propulsion'],
+            # subsystems['propulsion'],
         ]
         self.ode_args = {
             'aviary_options': aviary_inputs,
@@ -498,10 +498,10 @@ class AviaryProblem(om.Problem):
 
         # Propulsion isn't included in core pre-mission group to avoid override step in
         # configure() - instead add it now
-        pre_mission.add_subsystem(
-            'core_propulsion',
-            subsystems['propulsion'].build_pre_mission(self.aviary_inputs),
-        )
+        # pre_mission.add_subsystem(
+            # 'core_propulsion',
+            # subsystems['propulsion'].build_pre_mission(self.aviary_inputs),
+        # )
 
         default_subsystems = [
             subsystems['geometry'],
@@ -580,7 +580,7 @@ class AviaryProblem(om.Problem):
         subsystems = self.core_subsystems
         default_mission_subsystems = [
             subsystems['aerodynamics'],
-            subsystems['propulsion'],
+            # subsystems['propulsion'],
         ]
 
         phase_builder = self.configurator.get_phase_builder(self, phase_name, phase_options)
@@ -2329,7 +2329,7 @@ class AviaryProblem(om.Problem):
             all_subsystems.extend(external_subsystems)
 
         all_subsystems.append(self.core_subsystems['aerodynamics'])
-        all_subsystems.append(self.core_subsystems['propulsion'])
+        # all_subsystems.append(self.core_subsystems['propulsion'])
 
         return all_subsystems
 
