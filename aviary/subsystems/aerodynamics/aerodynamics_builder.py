@@ -161,6 +161,7 @@ class CoreAerodynamicsBuilder(AerodynamicsBuilderBase):
                 )
 
         elif self.code_origin is GASP:
+            # method = 'low_speed'
             try:
                 solve_alpha = aero_opts.pop('solve_alpha')
             except KeyError:

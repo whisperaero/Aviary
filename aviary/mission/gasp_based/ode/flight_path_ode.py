@@ -35,7 +35,7 @@ class FlightPathODE(TwoDOFODE):
         self.options.declare(
             'clean',
             types=bool,
-            default=False,
+            default=True,
             desc='If true then no flaps or gear are included. Useful for high-speed flight phases.',
         )
 
@@ -168,6 +168,6 @@ class FlightPathODE(TwoDOFODE):
         self.set_input_defaults(Dynamic.Vehicle.ANGLE_OF_ATTACK, val=np.zeros(nn), units='rad')
         self.set_input_defaults(Dynamic.Mission.FLIGHT_PATH_ANGLE, val=np.zeros(nn), units='deg')
         self.set_input_defaults(Dynamic.Mission.ALTITUDE, val=np.zeros(nn), units='ft')
-        self.set_input_defaults(Dynamic.Atmosphere.MACH, val=np.zeros(nn), units='unitless')
+        # self.set_input_defaults(Dynamic.Atmosphere.MACH, val=np.zeros(nn), units='unitless')
         self.set_input_defaults(Dynamic.Vehicle.MASS, val=np.zeros(nn), units='lbm')
         self.set_input_defaults(Dynamic.Mission.VELOCITY, val=np.zeros(nn), units='kn')

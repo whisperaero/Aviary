@@ -42,7 +42,7 @@ class RotationEOM(om.ExplicitComponent):
         )
         self.add_input(
             Dynamic.Mission.FLIGHT_PATH_ANGLE,
-            val=np.ones(nn),
+            val=np.zeros(nn),
             desc='flight path angle',
             units='rad',
         )
@@ -50,7 +50,7 @@ class RotationEOM(om.ExplicitComponent):
         add_aviary_input(self, Aircraft.Wing.INCIDENCE, val=0.0, units='deg')
         self.add_input(
             Dynamic.Vehicle.ANGLE_OF_ATTACK,
-            val=np.ones(nn),
+            val=np.zeros(nn),
             desc='angle of attack',
             units='deg',
         )

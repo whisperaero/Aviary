@@ -33,19 +33,19 @@ class GroundrollODE(TwoDOFODE):
 
         self.add_atmosphere()
 
-        # broadcast scalar i_wing to alpha for aero
-        self.add_subsystem(
-            'init_alpha',
-            om.ExecComp(
-                'alpha = i_wing',
-                i_wing={'units': 'deg', 'val': 1.1},
-                alpha={'units': 'deg', 'val': 1.1 * np.ones(nn)},
-            ),
-            promotes=[
-                ('i_wing', Aircraft.Wing.INCIDENCE),
-                ('alpha', Dynamic.Vehicle.ANGLE_OF_ATTACK),
-            ],
-        )
+        # # broadcast scalar i_wing to alpha for aero
+        # self.add_subsystem(
+        #     'init_alpha',
+        #     om.ExecComp(
+        #         'alpha = i_wing',
+        #         i_wing={'units': 'deg', 'val': 1.1},
+        #         alpha={'units': 'deg', 'val': 1.1 * np.ones(nn)},
+        #     ),
+        #     promotes=[
+        #         ('i_wing', Aircraft.Wing.INCIDENCE),
+        #         ('alpha', Dynamic.Vehicle.ANGLE_OF_ATTACK),
+        #     ],
+        # )
 
         kwargs = {
             'num_nodes': nn,
@@ -119,17 +119,19 @@ class GroundrollODE(TwoDOFODE):
         ParamPort.set_default_vals(self)
 
         if self.options['set_input_defaults']:
-            self.set_input_defaults('t_init_flaps', val=100.0)
-            self.set_input_defaults('t_init_gear', val=100.0)
-            self.set_input_defaults('aero_ramps.flap_factor:final_val', val=1.0)
-            self.set_input_defaults('aero_ramps.gear_factor:final_val', val=1.0)
-            self.set_input_defaults('aero_ramps.flap_factor:initial_val', val=1.0)
-            self.set_input_defaults('aero_ramps.gear_factor:initial_val', val=1.0)
-            self.set_input_defaults('t_curr', val=np.zeros(nn), units='s')
+            # self.set_input_defaults('t_init_flaps', val=100.0)
+            # self.set_input_defaults('t_init_gear', val=100.0)
+            # self.set_input_defaults('aero_ramps.flap_factor:final_val', val=1.0)
+            # self.set_input_defaults('aero_ramps.gear_factor:final_val', val=1.0)
+            # self.set_input_defaults('aero_ramps.flap_factor:initial_val', val=1.0)
+            # self.set_input_defaults('aero_ramps.gear_factor:initial_val', val=1.0)
+            # self.set_input_defaults('t_curr', val=np.zeros(nn), units='s')
+            pass
 
+        # self.set_input_defaults(Dynamic.Vehicle.ANGLE_OF_ATTACK, val=np.zeros(nn), units='deg')
         self.set_input_defaults(Dynamic.Mission.FLIGHT_PATH_ANGLE, val=np.zeros(nn), units='deg')
         self.set_input_defaults(Dynamic.Mission.ALTITUDE, val=np.zeros(nn), units='ft')
         self.set_input_defaults(Dynamic.Mission.VELOCITY, val=np.zeros(nn), units='kn')
         self.set_input_defaults(Dynamic.Mission.VELOCITY_RATE, val=np.zeros(nn), units='kn/s')
 
-        self.set_input_defaults(Aircraft.Wing.INCIDENCE, val=1.0, units='deg')
+        self.set_input_defaults(Aircraft.Wing.INCIDENCE, val=0, units='deg')

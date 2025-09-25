@@ -1106,7 +1106,7 @@ class AviaryProblem(om.Problem):
 
             super().setup(**kwargs)
 
-        self.set_initial_guesses(verbosity=None)
+        # self.set_initial_guesses(verbosity=None)
 
     def set_initial_guesses(self, parent_prob=None, parent_prefix='', verbosity=None):
         """

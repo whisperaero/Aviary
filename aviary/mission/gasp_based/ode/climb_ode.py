@@ -87,7 +87,7 @@ class ClimbODE(TwoDOFODE):
 
         mach_balance_group.nonlinear_solver = om.NewtonSolver()
         mach_balance_group.nonlinear_solver.options['solve_subsystems'] = True
-        mach_balance_group.nonlinear_solver.options['iprint'] = 0
+        mach_balance_group.nonlinear_solver.options['iprint'] = 2
         mach_balance_group.nonlinear_solver.options['atol'] = 1e-7
         mach_balance_group.nonlinear_solver.options['rtol'] = 1e-7
         mach_balance_group.nonlinear_solver.linesearch = om.BoundsEnforceLS()
@@ -145,7 +145,7 @@ class ClimbODE(TwoDOFODE):
                 kwargs.update(subsystem_options[subsystem.name])
             system = subsystem.build_mission(**kwargs)
             if system is not None:
-                if isinstance(subsystem, AerodynamicsBuilderBase):
+                if isinstance(subsystem, AerodynamicsBuilderBase) or subsystem.name == 'coupled_aero_prop':
                     lift_balance_group.add_subsystem(
                         subsystem.name,
                         system,

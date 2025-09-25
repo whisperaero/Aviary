@@ -43,7 +43,7 @@ class GroundrollEOM(om.ExplicitComponent):
         )
         self.add_input(
             Dynamic.Mission.FLIGHT_PATH_ANGLE,
-            val=np.ones(nn),
+            val=np.zeros(nn),
             desc='flight path angle',
             units='rad',
         )

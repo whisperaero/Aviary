@@ -171,6 +171,8 @@ class EngineSize(om.ExplicitComponent):
         add_aviary_option(self, Settings.VERBOSITY)
 
     def setup(self):
+        # print(self.options[Aircraft.Engine.NUM_ENGINES])
+
         num_engine_type = len(self.options[Aircraft.Engine.NUM_ENGINES])
 
         add_aviary_input(

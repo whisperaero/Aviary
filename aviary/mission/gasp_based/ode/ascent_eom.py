@@ -41,7 +41,7 @@ class AscentEOM(om.ExplicitComponent):
         self.add_input(Dynamic.Mission.VELOCITY, val=np.ones(nn), desc='Velocity', units='ft/s')
         self.add_input(
             Dynamic.Mission.FLIGHT_PATH_ANGLE,
-            val=np.ones(nn),
+            val=np.zeros(nn),
             desc='flight path angle',
             units='rad',
         )
@@ -49,7 +49,7 @@ class AscentEOM(om.ExplicitComponent):
 
         self.add_input(
             Dynamic.Vehicle.ANGLE_OF_ATTACK,
-            val=np.ones(nn),
+            val=np.zeros(nn),
             desc='angle of attack',
             units='deg',
         )

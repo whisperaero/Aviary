@@ -180,6 +180,13 @@ class AscentPhase(PhaseBuilderBase):
             ref=pitch_constraint_ref,
         )
 
+        phase.add_path_constraint(
+            Dynamic.Mission.ALTITUDE_RATE,
+            lower=0,
+            units='ft/s',
+            ref=100.0
+        )
+
         phase.add_parameter('t_init_gear', units='s', static_target=True, opt=False, val=38.25)
 
         phase.add_parameter('t_init_flaps', units='s', static_target=True, opt=False, val=48.21)
