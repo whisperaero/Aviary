@@ -27,14 +27,14 @@ class FlightPathPhaseOptions(AviaryOptionsDictionary):
         self.declare(
             name='num_segments',
             types=int,
-            default=5,
+            default=1,
             desc='The number of segments in transcription creation in Dymos.'
         )
 
         self.declare(
             name='order',
             types=int,
-            default=3,
+            default=None,
             desc='The order of polynomials for interpolation in the transcription '
                  'created in Dymos.'
         )
@@ -101,9 +101,9 @@ class FlightPathPhaseOptions(AviaryOptionsDictionary):
 
         # Flight path angle state (not used in ground_roll)
         defaults = {
-            'flight_path_angle_ref': np.deg2rad(5),
+            'flight_path_angle_ref': np.deg2rad(1),
             'flight_path_angle_defect_ref': 0.01,
-            'flight_path_angle_bounds': (np.deg2rad(-30), np.deg2rad(30)),
+            'flight_path_angle_bounds': (-15 * np.pi / 180, 25.0 * np.pi / 180),
         }
         self.add_state_options('flight_path_angle', units='rad', defaults=defaults)
 
@@ -296,13 +296,13 @@ class FlightPathPhase(PhaseBuilderBase):
                 ref=100.0
             )
 
-        # if constant_alt:
-        #     phase.add_path_constraint(
-        #         Dynamic.Mission.ALTITUDE,
-        #         equals=10_000,
-        #         units='ft',
-        #         ref=100.0
-        #     )
+        if constant_alt:
+            phase.add_path_constraint(
+                Dynamic.Mission.ALTITUDE_RATE,
+                equals=0,
+                units='ft/s',
+                ref=10.0
+            )
         #
         #
         # phase.add_path_constraint(
