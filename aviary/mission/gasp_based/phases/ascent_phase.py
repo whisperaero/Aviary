@@ -169,7 +169,7 @@ class AscentPhase(PhaseBuilderBase):
             Dynamic.Vehicle.ANGLE_OF_ATTACK,
         )
 
-        phase.add_path_constraint('load_factor', upper=1.10, lower=0.0)
+        # phase.add_path_constraint('load_factor', upper=1.10, lower=0.0)
 
         phase.add_path_constraint(
             'fuselage_pitch',
@@ -196,6 +196,7 @@ class AscentPhase(PhaseBuilderBase):
         phase.add_timeseries_output(Dynamic.Atmosphere.MACH)
         phase.add_timeseries_output('EAS', units='kn')
         phase.add_timeseries_output(Dynamic.Vehicle.LIFT)
+        phase.add_timeseries_output(Dynamic.Vehicle.DRAG)
         phase.add_timeseries_output('CL')
         phase.add_timeseries_output('CD')
 

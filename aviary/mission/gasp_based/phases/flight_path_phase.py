@@ -368,6 +368,12 @@ class FlightPathPhase(PhaseBuilderBase):
         )
 
         phase.add_timeseries_output(
+            Dynamic.Vehicle.DRAG,
+            output_name=Dynamic.Vehicle.DRAG,
+            units='lbf'
+        )
+
+        phase.add_timeseries_output(
             Dynamic.Vehicle.ANGLE_OF_ATTACK,
             output_name=Dynamic.Vehicle.ANGLE_OF_ATTACK,
             units='deg'
